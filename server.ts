@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
@@ -17,7 +17,7 @@ app.get('/tasks', async (req, res) => {
         });
         res.json(tasks);
     }
-    catch (error) {
+    catch (error: any) {
         console.error('Error fetching tasks:', error);
         res.status(500).json({ error: 'Failed to fetch tasks' });
     }
@@ -39,7 +39,7 @@ app.post('/tasks', async (req, res) => {
         });
         res.status(201).json(newTask);
     }
-    catch (error) {
+    catch (error: any) {
         console.error('Error creating task:', error);
         res.status(500).json({ error: 'Failed to create task' });
     }
@@ -58,7 +58,7 @@ app.put('/tasks/:id', async (req, res) => {
         });
         res.json(updatedTask);
     }
-    catch (error) {
+    catch (error: any) {
         console.error('Error updating task:', error);
         if (error.code === 'P2025') {
             return res.status(404).json({ error: 'Task not found' });
@@ -75,7 +75,7 @@ app.delete('/tasks/:id', async (req, res) => {
         });
         res.json({ message: 'Task deleted successfully' });
     }
-    catch (error) {
+    catch (error: any) {
         console.error('Error deleting task:', error);
         if (error.code === 'P2025') {
             return res.status(404).json({ error: 'Task not found' });
@@ -88,7 +88,7 @@ app.get('/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something went wrong!' });
 });

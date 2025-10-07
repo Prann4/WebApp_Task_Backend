@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",                   // Target versi ECMAScript
-    "module": "commonjs",              // Sistem modul Node.js
-    "outDir": "./dist",                // Direktori output untuk file JavaScript yang dikompilasi
-    "rootDir": "./src",                // Direktori root untuk file TypeScript
-    "esModuleInterop": true            // Mengizinkan impor ES6 ke dalam CommonJS
+    "target": "es2020",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
